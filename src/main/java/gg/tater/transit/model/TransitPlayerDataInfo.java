@@ -1,4 +1,4 @@
-package gg.tater.databridge.model;
+package gg.tater.transit.model;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class PlayerDataInfo implements GsonSerializable {
+public class TransitPlayerDataInfo implements GsonSerializable {
 
     private static final String GAME_MODE_FIELD = "player_gamemode";
 
@@ -29,10 +29,10 @@ public class PlayerDataInfo implements GsonSerializable {
                 .build();
     }
 
-    public static PlayerDataInfo deserialize(JsonElement element) {
+    public static TransitPlayerDataInfo deserialize(JsonElement element) {
         JsonObject object = (JsonObject) element;
 
-        PlayerDataInfo info = new PlayerDataInfo();
+        TransitPlayerDataInfo info = new TransitPlayerDataInfo();
         info.setGameMode(GameMode.valueOf(object.get(GAME_MODE_FIELD).getAsString()));
 
         return info;

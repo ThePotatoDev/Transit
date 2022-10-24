@@ -1,0 +1,5 @@
+datastore:
+  type: REDIS
+
+game-mode-option:
+  enabled: true
