@@ -1,7 +1,7 @@
 package gg.tater.transit.event;
 
 import gg.tater.transit.datastore.TransitDatastoreDao;
-import gg.tater.transit.event.custom.TransitCompleteLoadEvent;
+import gg.tater.transit.event.custom.TransitCompleteDataLoadEvent;
 import lombok.RequiredArgsConstructor;
 import me.lucko.helper.Events;
 import me.lucko.helper.terminable.TerminableConsumer;
@@ -23,8 +23,7 @@ public class TransitEventModule implements TerminableModule {
         Events.subscribe(PlayerLoginEvent.class)
                 .handler(event -> {
                     Player player = event.getPlayer();
-                    logger.info("");
-                    dao.getPlayerDataInfo(player.getUniqueId()).thenAcceptSync(info -> Events.call(new TransitCompleteLoadEvent(player, info)));
+                    dao.getPlayerDataInfo(player.getUniqueId()).thenAcceptSync(info -> Events.call(new TransitCompleteDataLoadEvent(player, info)));
                 })
                 .bindWith(consumer);
     }

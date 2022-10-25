@@ -17,7 +17,7 @@ import java.util.UUID;
 
 public class RedisTransitDatastore implements TransitDatastoreDao {
 
-    private static final String HASH_NAME = "bridge-data-info";
+    private static final String HASH_NAME = "transit-player-data";
 
     private Redis redis;
 

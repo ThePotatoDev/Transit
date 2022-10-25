@@ -21,7 +21,9 @@ import java.util.stream.Collectors;
 @Setter
 public class TransitPlayerDataInfo implements GsonSerializable {
 
+    public static final String META_FOOD_LEVEL_KEY = "food_level";
     public static final String META_GAME_MODE_KEY = "current_gamemode";
+    public static final String META_ENDER_CHEST_KEY = "ender_chest";
 
     private static final String META_MAP_KEY = "meta_map";
 

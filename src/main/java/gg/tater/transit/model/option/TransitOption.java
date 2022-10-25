@@ -1,4 +1,4 @@
-package gg.tater.transit.option;
+package gg.tater.transit.model.option;
 
 import gg.tater.transit.datastore.TransitDatastoreDao;
 import lombok.Getter;

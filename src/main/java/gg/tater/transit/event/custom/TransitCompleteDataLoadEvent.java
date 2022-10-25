@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 
 @RequiredArgsConstructor
 @Getter
-public class TransitCompleteLoadEvent extends Event {
+public class TransitCompleteDataLoadEvent extends Event {
 
     private static final HandlerList HANDLER_LIST = new HandlerList();
 

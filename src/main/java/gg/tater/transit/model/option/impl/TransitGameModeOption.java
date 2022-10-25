@@ -1,9 +1,9 @@
-package gg.tater.transit.option.impl;
+package gg.tater.transit.model.option.impl;
 
 import gg.tater.transit.datastore.TransitDatastoreDao;
-import gg.tater.transit.event.custom.TransitCompleteLoadEvent;
+import gg.tater.transit.event.custom.TransitCompleteDataLoadEvent;
 import gg.tater.transit.model.TransitPlayerDataInfo;
-import gg.tater.transit.option.TransitOption;
+import gg.tater.transit.model.option.TransitOption;
 import me.lucko.helper.Events;
 import me.lucko.helper.terminable.TerminableConsumer;
 import org.bukkit.GameMode;
@@ -33,7 +33,7 @@ public class TransitGameModeOption extends TransitOption {
         setEnabled(true);
         getLogger().info(LOGGER_PREFIX + "Enabled GameMode transit option.");
 
-        Events.subscribe(TransitCompleteLoadEvent.class)
+        Events.subscribe(TransitCompleteDataLoadEvent.class)
                 .handler(event -> {
                     Player player = event.getPlayer();
                     TransitPlayerDataInfo info = event.getData();
