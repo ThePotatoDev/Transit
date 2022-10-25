@@ -17,7 +17,6 @@ import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Logger;
 
 
 @Plugin(
@@ -32,12 +31,12 @@ public final class TransitPlugin extends ExtendedJavaPlugin implements TransitSe
 
     private final Set<TransitOption> options = new HashSet<>();
 
+    private TransitDatastoreDao dao;
+
     @Override
     protected void enable() {
         getConfig().options().copyDefaults(true);
         saveConfig();
-
-        provideService(TransitService.class, this);
 
         ConfigurationSection section = getConfig().getConfigurationSection(DATASTORE_SECTION_KEY);
         if (section == null) {
@@ -47,12 +46,12 @@ public final class TransitPlugin extends ExtendedJavaPlugin implements TransitSe
         }
 
         TransitDatastoreType type = TransitDatastoreType.valueOf(section.getString(DATASTORE_TYPE_KEY));
-        TransitDatastoreDao dao = bindModule(type == TransitDatastoreType.REDIS ? new RedisTransitDatastore() : type == TransitDatastoreType.SQL ? new SQLTransitDatastore() : new MongoTransitDatastore());
+        this.dao = bindModule(type == TransitDatastoreType.REDIS ? new RedisTransitDatastore() : type == TransitDatastoreType.SQL ? new SQLTransitDatastore() : new MongoTransitDatastore());
         bindModule(new TransitEventModule(getLogger(), dao));
 
-        registerOption(new TransitGameModeOption(dao, getConfig(), getLogger()));
-        registerOption(new TransitEnderChestOption(dao, getConfig(), getLogger()));
-        registerOption(new TransitFoodLevelOption(dao, getConfig(), getLogger()));
+        registerOption(new TransitGameModeOption());
+        registerOption(new TransitEnderChestOption());
+        registerOption(new TransitFoodLevelOption());
 
         options.stream()
                 .filter(TransitOption::isEnabled)
@@ -65,6 +64,11 @@ public final class TransitPlugin extends ExtendedJavaPlugin implements TransitSe
     @Override
     protected void disable() {
 
+    }
+
+    @Override
+    public TransitDatastoreDao getDao() {
+        return dao;
     }
 
     @Override
