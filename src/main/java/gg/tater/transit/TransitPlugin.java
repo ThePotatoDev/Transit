@@ -44,7 +44,7 @@ public final class TransitPlugin extends ExtendedJavaPlugin {
 
         bindModule(new TransitEventModule(getLogger(), dao));
 
-        handlers.add(new TransitGameModeOption(getConfig(), getLogger()));
+        handlers.add(new TransitGameModeOption(dao, getConfig(), getLogger()));
 
         handlers.stream()
                 .filter(TransitOption::isEnabled)

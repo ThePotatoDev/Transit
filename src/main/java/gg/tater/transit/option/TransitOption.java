@@ -1,5 +1,6 @@
 package gg.tater.transit.option;
 
+import gg.tater.transit.datastore.TransitDatastoreDao;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 @Setter
 public abstract class TransitOption implements TerminableModule {
 
+    private final TransitDatastoreDao dao;
     private final FileConfiguration config;
     private final Logger logger;
     private final String friendly;
